@@ -1,0 +1,110 @@
+" Key mapping
+"
+map <leader>bn :bn<cr>
+map <leader>bp :bp<cr>
+map -- :tabclose<cr><cr>
+map / :Unite line<cr>i
+map <leader>f H<leader><leader>f
+map <leader>p :Unite file buffer<cr>i
+" vmap <C-x> :!pbcopy<CR>
+" vmap <C-c> :w !pbcopy<CR><CR>
+
+" TMux/Vimux
+map <Leader>vz :VimuxZoomRunner<CR>
+let g:VimuxUseNearest=0
+
+" Setup clipboard to sync with OS-copy-paste
+set clipboard=unnamed
+
+" Indentation etc
+set tabstop=4
+
+" Python settings
+" autocmd FileType python :call RopeGotoDefinition()<cr>
+
+" Golang settings
+let g:go_bin_path = expand("~/bin")
+map <leader>i :GoImports<cr>
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap gd <Plug>(go-def)
+
+let g:tagbar_type_go = {  
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+" Solarized settings
+syntax enable
+set background=dark
+colorscheme solarized
+
+" Python settings
+let g:pymode_lint_ignore = "E501,W391"
+let g:pymode_lint_onfly = 1
+let g:pymode_lint_config = "$HOME/.pylintrc"
+let g:pymode_folding = 0
+
+" Filetype settings
+au BufNewFile,BufRead *.psr set filetype=xml
+
+" Plugin settings
+let g:eighties_enabled = 0
+let g:eighties_minimum_width = 80
+let g:eighties_extra_width = 0 " Increase this if you want some extra room
+let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
+" let g:eighties_bufname_additional_patterns = ['fugitiveblame'] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
+"
+
+map ,s :GitGutterStageHunk<cr>
+
+
+" Required by tmux
+set t_Co=256                        " force vim to use 256 colors
+let g:solarized_termcolors=256      " use solarized 256 fallback
+
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_play_open_browser = 0
+let g:go_auto_sameids = 1
+" let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_deadline = "5s"
+let g:go_auto_type_info = 1
