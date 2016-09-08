@@ -2,7 +2,7 @@
 
 NAME="IDE"
 
-tmux new-session -s "$NAME" -n "editor" -d "vim /repo"
+tmux new-session -s "$NAME" -n "editor" -d "vim /go/src"
 tmux new-window -t "$NAME:1" -n "shell" bash
 tmux new-window -t "$NAME:2" -n "shell2" bash
 
