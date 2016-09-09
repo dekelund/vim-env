@@ -13,7 +13,7 @@ ENV TERM=screen-256color
 
 RUN echo "deb http://http.debian.net/debian wheezy-backports main" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y ack ctags git ruby rake python git legit tmux zsh build-essential python-dev python3-dev libclang-dev zsh
-RUN apt-get -t wheezy-backports install -y vim-nox vim-common cmake
+RUN apt-get -t wheezy-backports install -y vim-nox vim-common cmake python-pip ipython
 
 
 # Install Janus Vim Environment
@@ -63,6 +63,9 @@ RUN go get github.com/kisielk/errcheck
 RUN go get github.com/jstemmer/gotags
 RUN go get github.com/tools/godep
 
+# Setup BDD tools
+RUN go get gomate.io/gomate
+RUN go install gomate.io/gomate
 
 # Setup customisation of vim and plugins
 COPY .vimrc.after /root/.vimrc.after
@@ -73,23 +76,29 @@ COPY .vimrc.before /root/.vimrc.before
 COPY install-oh-my-zsh.sh /opt/install-oh-my-zsh.sh
 RUN zsh -c /opt/install-oh-my-zsh.sh
 
+COPY ./.zshrc /root/.zshrc
+RUN pip install powerline-status
 
 # Add script to be used as entrypoint
 COPY ./.tmux.conf /root/.tmux.conf
 COPY start.sh /opt/start.sh
 
+# Vim configuration file to be user by host
+RUN mkdir -p /root/hostconfig
+RUN touch /root/hostconfig/vimrc
 
 # Setup Language Environtment
-ENV LANG="en_US.UTF-8"
-ENV LC_COLLATE="en_US.UTF-8"
-ENV LC_CTYPE="en_US.UTF-8"
-ENV LC_MESSAGES="en_US.UTF-8"
-ENV LC_MONETARY="en_US.UTF-8"
-ENV LC_NUMERIC="en_US.UTF-8"
-ENV LC_TIME="en_US.UTF-8"
-# ENV LC_ALL="en_US.UTF-8"
+ENV LANG="C.UTF-8"
+ENV LC_COLLATE="C.UTF-8"
+ENV LC_CTYPE="C.UTF-8"
+ENV LC_MESSAGES="C.UTF-8"
+ENV LC_MONETARY="C.UTF-8"
+ENV LC_NUMERIC="C.UTF-8"
+ENV LC_TIME="C.UTF-8"
 
+RUN apt-get install -y watch
 
 # Start the container
 WORKDIR /repo
-ENTRYPOINT /opt/start.sh
+ENTRYPOINT ["/opt/start.sh"]
+CMD ["default"]

@@ -108,3 +108,7 @@ let g:go_auto_sameids = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_deadline = "5s"
 let g:go_auto_type_info = 1
+
+" if filereadable(expand("/root/hostconfig/vimrc"))
+  source /root/hostconfig/vimrc
+" endif
