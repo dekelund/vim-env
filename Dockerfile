@@ -62,6 +62,7 @@ RUN go get github.com/golang/lint/golint
 RUN go get github.com/kisielk/errcheck
 RUN go get github.com/jstemmer/gotags
 RUN go get github.com/tools/godep
+RUN go get github.com/alecthomas/gometalinter
 
 # Setup BDD tools
 RUN go get gomate.io/gomate
