@@ -117,6 +117,6 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 let g:go_fmt_command = "goimports"
 
-" if filereadable(expand("/root/hostconfig/vimrc"))
+if filereadable(expand("~/hostconfig/vimrc"))
   source /root/hostconfig/vimrc
-" endif
+endif

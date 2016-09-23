@@ -12,7 +12,7 @@ MAINTAINER Daniel Ekelund
 ENV TERM=screen-256color
 
 RUN echo "deb http://http.debian.net/debian wheezy-backports main" >> /etc/apt/sources.list
-RUN apt-get update && apt-get install -y ack ctags git ruby rake python git legit tmux zsh build-essential python-dev python3-dev libclang-dev zsh
+RUN apt-get update && apt-get install -y ack ctags git ruby rake python git legit tmux zsh build-essential python-dev python3-dev libclang-dev zsh less
 RUN apt-get -t wheezy-backports install -y vim-nox vim-common cmake python-pip ipython
 
 
@@ -63,6 +63,10 @@ RUN go get github.com/kisielk/errcheck
 RUN go get github.com/jstemmer/gotags
 RUN go get github.com/tools/godep
 RUN go get github.com/alecthomas/gometalinter
+RUN go get github.com/zmb3/gogetdoc
+RUN go get github.com/klauspost/asmfmt/cmd/asmfmt
+RUN go get github.com/fatih/motion
+RUN go get github.com/josharian/impl
 
 # Setup BDD tools
 RUN go get gomate.io/gomate
