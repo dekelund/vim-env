@@ -72,6 +72,9 @@ RUN go get github.com/josharian/impl
 RUN go get gomate.io/gomate
 RUN go install gomate.io/gomate
 
+# Setup debuggers
+RUN go get github.com/derekparker/delve/cmd/dlv
+
 # Setup customisation of vim and plugins
 COPY .vimrc.after /root/.vimrc.after
 COPY .vimrc.before /root/.vimrc.before
